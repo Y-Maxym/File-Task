@@ -13,4 +13,6 @@ public interface MathService {
     void maxIncreasingSequence(List<Long> numbers);
 
     void maxDecreasingSequence(List<Long> numbers);
+
+    void allFunctions(List<Long> numbers);
 }

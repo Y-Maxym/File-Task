@@ -16,8 +16,9 @@ public class ConsoleServiceImpl implements ConsoleService {
     @Override
     public void printGreetingMessage() {
         String message = """
+                ---------------------------------
                 Hello!
-                Please, write a filepath:
+                Please, write a filepath or print exit:
                 """;
         System.out.print(message);
     }
@@ -27,10 +28,16 @@ public class ConsoleServiceImpl implements ConsoleService {
         String line;
         while (true) {
             line = scanner.nextLine();
+            if ("exit".equalsIgnoreCase(line)) System.exit(0);
             if (fileService.isValidFile(line, "txt")) break;
-            else System.out.println("Invalid file, please try again:");
+            else System.out.println("Invalid file, please try again.");
         }
 
         return line;
+    }
+
+    @Override
+    public void printSpendTime(String text, Double spendTime) {
+        System.out.printf(text, spendTime);
     }
 }

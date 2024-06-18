@@ -14,8 +14,8 @@ public class MathServiceImpl implements MathService {
         long min = numbers.getFirst();
 
         for (Long number : numbers) {
-            if (number > max) max = number;
-            if (number < min) min = number;
+            max = Math.max(max, number);
+            min = Math.min(min, number);
         }
         System.out.printf("Max: %d\nMin: %d\n", max, min);
     }
@@ -110,5 +110,14 @@ public class MathServiceImpl implements MathService {
                 new ArrayList<>() : numbers.subList(startSeq, endSeq + 1);
 
         System.out.printf("Max decreasing sequence: %s\n", sequence);
+    }
+
+    @Override
+    public void allFunctions(List<Long> numbers) {
+        minMax(numbers);
+        median(numbers);
+        average(numbers);
+        maxIncreasingSequence(numbers);
+        maxDecreasingSequence(numbers);
     }
 }
