@@ -35,6 +35,8 @@ public class Main {
         mathService.minMax(numbers);
         mathService.median(numbers);
         mathService.average(numbers);
+        mathService.maxIncreasingSequence(numbers);
+        mathService.maxDecreasingSequence(numbers);
         long end = System.currentTimeMillis();
         System.out.printf("Time spent: %.2f s.", (end - start) / 1000f);
     }

@@ -10,7 +10,7 @@ public interface MathService {
 
     void average(List<Long> numbers);
 
-    void maxSequence(List<Long> numbers);
+    void maxIncreasingSequence(List<Long> numbers);
 
-    void minSequence(List<Long> numbers);
+    void maxDecreasingSequence(List<Long> numbers);
 }

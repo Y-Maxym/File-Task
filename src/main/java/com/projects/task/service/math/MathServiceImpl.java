@@ -2,7 +2,7 @@ package com.projects.task.service.math;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -47,12 +47,68 @@ public class MathServiceImpl implements MathService {
     }
 
     @Override
-    public void maxSequence(List<Long> numbers) {
+    public void maxIncreasingSequence(List<Long> numbers) {
+        if (numbers.size() < 2) {
+            System.out.println("Max increasing sequence: []");
+            return;
+        }
 
+        int startSeq = 0;
+        int endSeq = 0;
+        int currStart = 0;
+
+        for (int i = 1; i < numbers.size(); i++) {
+            if (numbers.get(i) <= numbers.get(i - 1)) {
+                if (i - 1 - currStart > endSeq - startSeq) {
+                    startSeq = currStart;
+                    endSeq = i - 1;
+                }
+                currStart = i;
+            }
+        }
+
+        if (numbers.getLast() > numbers.get(numbers.size() - 2)
+                && (numbers.size() - 1 - currStart > endSeq - startSeq)) {
+            startSeq = currStart;
+            endSeq = numbers.size() - 1;
+        }
+
+        List<Long> sequence = startSeq == endSeq ?
+                new ArrayList<>() : numbers.subList(startSeq, endSeq + 1);
+
+        System.out.printf("Max increasing sequence: %s\n", sequence);
     }
 
     @Override
-    public void minSequence(List<Long> numbers) {
+    public void maxDecreasingSequence(List<Long> numbers) {
+        if (numbers.size() < 2) {
+            System.out.println("Max decreasing sequence: []");
+            return;
+        }
 
+        int startSeq = 0;
+        int endSeq = 0;
+        int currStart = 0;
+
+        for (int i = 1; i < numbers.size(); i++) {
+            if (numbers.get(i) >= numbers.get(i - 1)) {
+                if (i - 1 - currStart > endSeq - startSeq) {
+                    startSeq = currStart;
+                    endSeq = i - 1;
+                }
+                currStart = i;
+            }
+        }
+
+        if (numbers.getLast() < numbers.get(numbers.size() - 2)
+                && (numbers.size() - 1 - currStart > endSeq - startSeq)) {
+            startSeq = currStart;
+            endSeq = numbers.size() - 1;
+        }
+
+        List<Long> sequence = startSeq == endSeq ?
+                new ArrayList<>() : numbers.subList(startSeq, endSeq + 1);
+
+        System.out.printf("Max decreasing sequence: %s\n", sequence);
     }
 }
