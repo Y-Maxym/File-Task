@@ -6,28 +6,32 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class FileServiceImpl implements FileService {
 
     @Override
-    public long[] readNumbersFromFile(String filePath) {
+    public List<Long> readNumbersFromFile(String filePath) {
         try {
             List<String> lines = Files.readAllLines(Path.of(filePath));
-            long[] numbers = new long[lines.size()];
-            int index = 0;
+            List<Long> numbers = new ArrayList<>();
+
             for (String line : lines) {
+                if (line.trim().isEmpty()) continue;
+
                 try {
-                    numbers[index++] = Long.parseLong(line.trim());
+                    numbers.add(Long.parseLong(line.trim()));
                 } catch (NumberFormatException ignore) {
                 }
             }
+
             return numbers;
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
-        return new long[0];
+        return new ArrayList<>();
     }
 
     @SneakyThrows

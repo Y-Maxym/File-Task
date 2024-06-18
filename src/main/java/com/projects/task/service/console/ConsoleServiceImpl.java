@@ -14,13 +14,16 @@ public class ConsoleServiceImpl implements ConsoleService {
     private final Scanner scanner = new Scanner(System.in);
 
     @Override
-    public String printGreetingsAndGetFilePath() {
+    public void printGreetingMessage() {
         String message = """
                 Hello!
                 Please, write a filepath:
                 """;
         System.out.print(message);
+    }
 
+    @Override
+    public String getFilePath() {
         String line;
         while (true) {
             line = scanner.nextLine();
